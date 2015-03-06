@@ -70,7 +70,7 @@ module Push
       # [1, id_for_pack, expiry, 0, 32, device, payload_size, payload].pack("cNNccH*na*")
       [2, frame_length, 1, 32, device, 2, payload_size, payload, 3, 4, id_for_pack, 4, 4, expiry, 5, 1, priority].pack("cNcnH*cna*cnNcnNcnc").tap do |t|
         h = t.each_byte.collect{|b| b.to_s(16)}.join
-        ::Rails.logger.debug "APNS packed message : #{h}"
+        Push::Daemon.logger.debug "APNS packed message : #{h}"
       end
     end
 
